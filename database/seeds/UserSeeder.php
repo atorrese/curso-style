@@ -23,11 +23,22 @@ class UserSeeder extends Seeder
         where('title','Desarrollador back-end')
         ->value('id');
     
-        User::create([
-            'name'=> 'Duilio Palacios',
-            'email'=> 'duilio@styde.net',
-            'password'=> bcrypt('laravel'),
-            'profession_id'=>$profession,
+        factory(User::class)->create([
+            'name' => 'Duilio Palacios',
+            'email' => 'duilio@styde.net',
+            'password' => bcrypt('laravel'),
+            'profession_id' =>$profession,
+            'is_admin' => true,
             ]);
+
+        factory(User::class)->create([
+                'profession_id'=> $profession
+            ]);
+
+            
+
+
+
+        factory(User::class,48)->create();
     }
 }
