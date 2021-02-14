@@ -14,15 +14,26 @@ Route::get('/', function () {
     return 'Home';
 });
 
-Route::get('/usuarios', 'UserController@index');
+Route::get('/usuarios', 'UserController@index')->name('users.index');
 
-Route::get('/usuarios/{id}', 'UserController@show')
-    ->where('id','[0-9]+');
+Route::get('/usuarios/{user}', 'UserController@show')
+    ->where('user','[0-9]+')
+    ->name('users.show');
 
-Route::get('/usuarios/nuevo', 'UserController@create');
+Route::get('/usuarios/nuevo', 'UserController@create')->name('users.create');
 
-Route::get('/usuarios/{id}/edit', 'UserController@edit')
-    ->where('id','[0-9]+');
+Route::get('/usuarios/{user}/edit', 'UserController@edit')
+    ->where('user','[0-9]+')->name('users.edit');
+
+Route::post('/usuarios','UserController@store');
+
+Route::put('/usuarios/{user}', 'UserController@update')
+    ->where('user','[0-9]+')
+    ->name('users.update');
+
+Route::delete('/usuarios/{user}', 'UserController@destroy')
+    ->where('user','[0-9]+')
+    ->name('users.destroy');
 
 Route::get('/saludo/{name}/', 'WelcomeUsersController@without_nickname');
 Route::get('/saludo/{name}/{nickname?}', 'WelcomeUsersController');
